@@ -6,6 +6,7 @@ import com.example.employeemanager.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,16 +27,20 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee updateEmployee(Employee employee){
-        return employeeRepository.save(employee);
+//    public Employee updateEmployee(Long id, Employee employee){
+//        return employeeRepository.save(employee);
+//    }
+
+    public Optional<Employee> findEmployeeById(Long id){
+       return employeeRepository.findEmployeeById(id);
+//               .orElseThrow(() -> new EmployeeNotFoundException("Employee by id " + id + "was not found"));
     }
 
-    public Employee findEmployeeById(Long id){
-       return employeeRepository.findEmployeeById(id)
-               .orElseThrow(() -> new EmployeeNotFoundException("Employee by id " + id + "was not found"));
+    public void deleteById(Long id) {
+        employeeRepository.deleteById(id);
     }
 
-    public void deleteEmployee(Long id){
-        employeeRepository.deleteEmployeeById(id);
-    }
+//    public void deleteEmployee(Long id){
+//        employeeRepository.deleteEmployeeById(id);
+//    }
 }
