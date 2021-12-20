@@ -1,5 +1,6 @@
 package com.example.employeemanager.service;
 
+import com.example.employeemanager.exception.EmployeeNotFoundException;
 import com.example.employeemanager.models.Employee;
 import com.example.employeemanager.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
