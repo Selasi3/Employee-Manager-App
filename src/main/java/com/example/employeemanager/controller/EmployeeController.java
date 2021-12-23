@@ -40,21 +40,14 @@ public class EmployeeController {
         return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
     }
 
-    @PutMapping("update/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee){
-        Optional<Employee> employeeData = employeeService.findEmployeeById(id);
-        if(employeeData.isPresent()){
-            Employee _employee = employeeData.get();
-            _employee.setEmail(employee.getEmail());
-            _employee.setName(employee.getName());
-            _employee.setJobTitle(employee.getJobTitle());
-            _employee.setPhone(employee.getPhone());
+    @PutMapping("/update")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
+        Employee updateEmployee = employeeService.updateEmployee(employee);
+        return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
+    }
 
-            return new ResponseEntity<>(employeeService.addEmployee(_employee), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-}
+
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id){
        employeeService.deleteById(id);
